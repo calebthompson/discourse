@@ -106,17 +106,11 @@ class Category < ActiveRecord::Base
   end
 
   def self.update_stats
-    topics_with_post_count = Topic
-                              .select("topics.category_id, COUNT(*) topic_count, SUM(topics.posts_count) post_count")
-                              .where("topics.id NOT IN (select cc.topic_id from categories cc WHERE topic_id IS NOT NULL)")
-                              .group("topics.category_id")
-                              .visible.to_sql
-
     Category.exec_sql <<SQL
     UPDATE categories c
     SET   topic_count = x.topic_count,
           post_count = x.post_count
-    FROM (#{topics_with_post_count}) x
+    FROM topics_with_post_count x
     WHERE x.category_id = c.id AND
           (c.topic_count <> x.topic_count OR c.post_count <> x.post_count)
 

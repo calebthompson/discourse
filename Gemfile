@@ -95,7 +95,6 @@ gem 'active_model_serializers', '~> 0.8.0'
 
 
 gem 'onebox'
-
 gem 'ember-rails'
 gem 'ember-source', '1.6.0.beta.2'
 gem 'handlebars-source', '1.3.0'
@@ -242,6 +241,8 @@ gem 'memory_profiler', require: false, platform: :mri_21
 gem 'rmmseg-cpp', require: false
 
 gem 'logster'
+
+gem 'scenic'
 
 # perftools only works on 1.9 atm
 group :profile do
